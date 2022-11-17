@@ -1,1 +1,236 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+    <meta charset="utf-8">
+    <title>Hello</title>
+    </head>
 
+ <body>
+    
+    <p>Linijka 1</p>
+    <p>Linijka 2</p>
+    <p>Linijka 3</p>
+    <p>Linijka 4</p>
+    <p>Linijka 5</p>
+    
+ </body>
+
+ <script>
+    //var style = document.createElement('style');
+    
+    var ktoryIDlugosc="";
+    function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+    }
+    colors=["red", "orange", "green", "blue"];
+    var pTag=document.getElementsByTagName("p");
+
+    var ifClickedArray=[]
+    for(let i=0;i<pTag.length;i++){
+        ifClickedArray.push(false);
+    }
+
+
+    for(let i=0;i<pTag.length;i++){
+        ktoryIDlugosc="";
+        ktoryIDlugosc="Paragraf "+(i+1)+" z "+pTag.length + " i ma długość "+pTag[i].innerText.length;
+        pTag[i].style.color = colors[getRandomInt(4)];
+        pTag[i].setAttribute("title",ktoryIDlugosc);
+        pTag[i].setAttribute("class","class"+i);
+
+        for(let j=0;j<pTag.length;j++)
+        {
+            if(i!=j)
+            {
+                pTag[i].addEventListener("click", (e) => {pTag[j].style.borderStyle="";pTag[j].style.backgroundColor="";
+                pTag[j].style.borderColor=""});
+            }
+        }
+
+
+        pTag[i].addEventListener("click", (e) => {e.target.style.borderStyle="solid";e.target.style.borderColor="green"});
+        if(i>0 && i<pTag.length)
+        {
+            pTag[i].addEventListener("click", (e) => {pTag[i-1].style.borderStyle="solid";pTag[i-1].style.borderColor="blue"});
+            pTag[i].addEventListener("click", (e) => {pTag[i+1].style.borderStyle="solid";pTag[i+1].style.borderColor="orange"});
+        }
+        else if(i>0)
+        {
+            pTag[i].addEventListener("click", (e) => {pTag[i-1].style.borderStyle="solid";pTag[i-1].style.borderColor="blue"});
+        }
+        else if(i<pTag.length)
+        {
+            pTag[i].addEventListener("click", (e) => {pTag[i+1].style.borderStyle="solid";pTag[i+1].style.borderColor="orange"});   
+        }
+        if(i%2==0)
+        {
+            pTag[i].addEventListener("click", (e) => {e.target.style.backgroundColor="lightgray";e.target.style.borderColor="green"});
+        }
+        else
+        {
+            pTag[i].addEventListener("click", (e) => {e.target.style.backgroundColor="gray"});
+        }
+        //let divTag=document.createElement("div");
+        //divTag.innerText=ktoryIDlugosc;
+        //divTag.setAttribute("class","hide"+i);
+        //let body=document.getElementsByTagName("body");
+        //body[0].appendChild(divTag);
+        //let css='.hide'+i+' {display: none;}';
+        //style.appendChild(document.createTextNode(css));
+        //css='.class'+i+':hover + .hide'+i+' {display: block; color: red}';
+        //style.appendChild(document.createTextNode(css));
+        var header;
+        header=document.createElement("h1");
+        header.innerText="Paragraf "+i;
+        header.addEventListener("click", (e) => {
+            if(ifClickedArray[i])
+            {
+                ifClickedArray[i]=!ifClickedArray[i];
+                pTag[i].style.display="block";
+            }
+            else
+            {
+                ifClickedArray[i]=!ifClickedArray[i];
+                pTag[i].style.display="none";
+            }
+        });
+        pTag[i].parentNode.insertBefore(header,pTag[i]);
+    }
+    //document.getElementsByTagName('head')[0].appendChild(style);
+
+
+
+    /*var body=document.getElementsByTagName("body")[0];
+    var paragraphs=body.getElementsByTagName("p");
+    var headers=[];
+    var all=[];
+    console.log(paragraphs[0].innerHTML);
+    for(let i=0;i<paragraphs.length;i++)
+    {
+        headers.push(document.createElement("h1"));
+        headers[i].innerText="Paragraf "+i;
+        all.push(paragraphs[i]);
+        all.push(headers[i]);
+    }
+    var paragraphy=getElementsByTagName("p");
+    for(let i=0;i<paragraphy.length;i++)
+    {
+        paragraphy[i].remove();
+    }*/
+
+    var ii = document.createElement("button");
+    ii.textContent="Dodaj paragraf";
+    ii.onclick=funkcja;
+
+    document.getElementsByTagName('body')[0].appendChild(ii);
+
+    function funkcja(){
+        console.log("FUNKCJAAAAA")
+        let p= document.createElement("p");
+        document.body.appendChild(p);
+        pTag=document.getElementsByTagName("p");
+        pTag[pTag.length-1].innerText= "Linijka " + pTag.length;
+        i=pTag.length-1;
+        ktoryIDlugosc="";
+        ktoryIDlugosc="Paragraf "+(i+1)+" z "+pTag.length + " i ma długość "+pTag[i].innerText.length;
+        pTag[i].style.color = colors[getRandomInt(4)];
+        pTag[i].setAttribute("title",ktoryIDlugosc);
+        pTag[i].setAttribute("class","class"+i);
+
+        for(let j=0;j<pTag.length;j++)
+        {
+            if(i!=j)
+            {
+                pTag[i].addEventListener("click", (e) => {pTag[j].style.borderStyle="";pTag[j].style.backgroundColor="";
+                pTag[j].style.borderColor=""});
+            }
+        }
+
+
+        pTag[i].addEventListener("click", (e) => {e.target.style.borderStyle="solid";e.target.style.borderColor="green"});
+        if(i>0 && i<pTag.length)
+        {
+            pTag[i].addEventListener("click", (e) => {pTag[i-1].style.borderStyle="solid";pTag[i-1].style.borderColor="blue"});
+            pTag[i].addEventListener("click", (e) => {pTag[i+1].style.borderStyle="solid";pTag[i+1].style.borderColor="orange"});
+        }
+        else if(i>0)
+        {
+            pTag[i].addEventListener("click", (e) => {pTag[i-1].style.borderStyle="solid";pTag[i-1].style.borderColor="blue"});
+        }
+        else if(i<pTag.length)
+        {
+            pTag[i].addEventListener("click", (e) => {pTag[i+1].style.borderStyle="solid";pTag[i+1].style.borderColor="orange"});   
+        }
+        if(i%2==0)
+        {
+            pTag[i].addEventListener("click", (e) => {e.target.style.backgroundColor="lightgray";e.target.style.borderColor="green"});
+        }
+        else
+        {
+            pTag[i].addEventListener("click", (e) => {e.target.style.backgroundColor="gray"});
+        }
+        //let divTag=document.createElement("div");
+        //divTag.innerText=ktoryIDlugosc;
+        //divTag.setAttribute("class","hide"+i);
+        //let body=document.getElementsByTagName("body");
+        //body[0].appendChild(divTag);
+        //let css='.hide'+i+' {display: none;}';
+        //style.appendChild(document.createTextNode(css));
+        //css='.class'+i+':hover + .hide'+i+' {display: block; color: red}';
+        //style.appendChild(document.createTextNode(css));
+        var header;
+        header=document.createElement("h1");
+        header.innerText="Paragraf "+i;
+        header.addEventListener("click", (e) => {
+            if(ifClickedArray[i])
+            {
+                ifClickedArray[i]=!ifClickedArray[i];
+                pTag[i].style.display="block";
+            }
+            else
+            {
+                ifClickedArray[i]=!ifClickedArray[i];
+                pTag[i].style.display="none";
+            }
+        });
+        pTag[i].parentNode.insertBefore(header,pTag[i]);
+
+        for(let j=0;j<pTag.length;j++)
+        {
+            for(let k=0;k<pTag.length;k++)
+            {
+                if(k!=j)
+            {
+                pTag[j].addEventListener("click", (e) => {pTag[k].style.borderStyle="";pTag[k].style.backgroundColor="";
+                pTag[k].style.borderColor=""});
+            }
+            }
+            ktoryIDlugosc="Paragraf "+(j+1)+" z "+pTag.length + " i ma długość "+pTag[j].innerText.length;
+            pTag[j].setAttribute("title",ktoryIDlugosc);
+            if(i>0 && i<pTag.length)
+        {
+            pTag[j].addEventListener("click", (e) => {pTag[j-1].style.borderStyle="solid";pTag[j-1].style.borderColor="blue"});
+            pTag[j].addEventListener("click", (e) => {pTag[j+1].style.borderStyle="solid";pTag[j+1].style.borderColor="orange"});
+        }
+        else if(i>0)
+        {
+            pTag[j].addEventListener("click", (e) => {pTag[j-1].style.borderStyle="solid";pTag[j-1].style.borderColor="blue"});
+        }
+        else if(i<pTag.length)
+        {
+            pTag[j].addEventListener("click", (e) => {pTag[j+1].style.borderStyle="solid";pTag[j+1].style.borderColor="orange"});   
+        }
+        if(i%2==0)
+        {
+            pTag[j].addEventListener("click", (e) => {e.target.style.backgroundColor="lightgray";e.target.style.borderColor="green"});
+        }
+        else
+        {
+            pTag[j].addEventListener("click", (e) => {e.target.style.backgroundColor="gray"});
+        }
+            
+        }
+    }
+
+</script>
+</html>
